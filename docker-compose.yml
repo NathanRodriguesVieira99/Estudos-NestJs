@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   postgresql:
@@ -6,6 +6,7 @@ services:
     image: bitnami/postgresql:latest
     ports:
       - 5434:5432
+    restart: unless-stopped
     environment:
       POSTGRESQL_USERNAME: postgres
       POSTGRESQL_PASSWORD: docker
