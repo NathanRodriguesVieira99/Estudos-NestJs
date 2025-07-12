@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  postgresql:
+    container_name: estudos-nestjs-pg
+    image: bitnami/postgresql:latest
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: docker
+      POSTGRESQL_DATABASE: estudos-nestjs-db
+    volumes:
+      - postgres_data:/bitnami/postgresql
+
+volumes:
+  postgres_data:
