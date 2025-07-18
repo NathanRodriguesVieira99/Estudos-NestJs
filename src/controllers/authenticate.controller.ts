@@ -20,7 +20,7 @@ export class AuthenticateController {
 
   @Post()
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
-  async handle(@Body() body: AuthenticateBodySchema) {
+  async execute(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body;
 
     const user = await this.prisma.user.findUnique({
