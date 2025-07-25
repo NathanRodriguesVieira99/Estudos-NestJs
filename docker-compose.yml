@@ -5,7 +5,7 @@ services:
     container_name: estudos-nestjs-pg
     image: bitnami/postgresql:latest
     ports:
-      - 5434:5432
+      - ${PORT}:5432
     restart: unless-stopped
     environment:
       POSTGRESQL_USERNAME: ${POSTGRESQL_USERNAME}
