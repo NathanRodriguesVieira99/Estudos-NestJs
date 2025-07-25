@@ -13,10 +13,10 @@ export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy
 {
-  constructor(@Inject(ConfigService) config: ConfigService<Env, true>) {
+  constructor(@Inject(ConfigService) configService: ConfigService<Env, true>) {
     super({
       log:
-        config.get('NODE_ENV', { infer: true }) === 'development'
+        configService.get('NODE_ENV', { infer: true }) === 'development'
           ? ['query', 'error', 'warn']
           : ['error'],
     });
