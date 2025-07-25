@@ -20,6 +20,11 @@ export default defineConfig({
         '**/*.d.ts',
         '**/mocks/**',
         '**/*.test-utils.{ts,tsx}',
+        'src/main.ts',
+        '**/*.module.ts',
+      
+       
+     
       ],
     },
   },

@@ -9,6 +9,7 @@ export default defineConfig({
     root: './',
     coverage: {
       reportsDirectory: './coverage',
+      reporter: ['text', 'html', 'lcov', 'cobertura'],
       provider: 'v8',
       include: ['src/**/*.{ts,js}'],
       exclude: [
@@ -18,6 +19,8 @@ export default defineConfig({
         '**/*.d.ts',
         '**/mocks/**',
         '**/*.test-utils.{ts,tsx}',
+        'src/main.ts',
+        '**/*.module.ts',
       ],
     },
   },
