@@ -11,7 +11,7 @@ import {
   type CreateAccountBodySchema,
   createAccountBodySchema,
 } from '@/schemas/createAccountBodySchema';
-import type { PrismaService } from '@/services/prisma/prisma.service';
+import { PrismaService } from '@/services/prisma/prisma.service';
 import { hashPassword } from '@/utils/hash';
 
 @Controller('/accounts')
