@@ -9,10 +9,10 @@ import { JwtService } from '@nestjs/jwt';
 import {
   authenticateBodySchema,
   AuthenticateBodySchema,
-} from '../schemas/authenticateBodySchema';
-import { ZodValidationPipe } from 'src/pipes/zod-validation-pipe';
-import { PrismaService } from '../services/prisma/prisma.service';
-import { comparePassword } from 'src/utils/hash';
+} from '@/schemas/authenticateBodySchema';
+import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
+import { PrismaService } from '@/services/prisma/prisma.service';
+import { comparePassword } from '@/utils/hash';
 
 @Controller('/sessions')
 export class AuthenticateController {
