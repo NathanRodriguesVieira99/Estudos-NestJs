@@ -10,6 +10,7 @@ import { PrismaService } from '@/services/prisma/prisma.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: '.env.development',
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
     }),
