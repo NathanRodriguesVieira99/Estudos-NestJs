@@ -2,8 +2,8 @@ import {
   Injectable,
   type OnModuleDestroy,
   type OnModuleInit,
-} from "@nestjs/common";
-import { PrismaClient } from "generated/prisma";
+} from '@nestjs/common';
+import { PrismaClient } from 'generated/prisma';
 
 @Injectable()
 export class PrismaService
@@ -12,7 +12,7 @@ export class PrismaService
 {
   constructor() {
     super({
-      log: ["warn", "error"],
+      log: ['warn', 'error'],
     });
   }
   onModuleInit() {

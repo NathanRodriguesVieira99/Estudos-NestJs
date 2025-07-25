@@ -1,11 +1,17 @@
-import { ConflictException, UsePipes } from '@nestjs/common';
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
-import { PrismaService } from '@/services/prisma/prisma.service';
 import {
-  createAccountBodySchema,
+  Body,
+  ConflictException,
+  Controller,
+  HttpCode,
+  Post,
+  UsePipes,
+} from '@nestjs/common';
+import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
+import {
   type CreateAccountBodySchema,
+  createAccountBodySchema,
 } from '@/schemas/createAccountBodySchema';
+import type { PrismaService } from '@/services/prisma/prisma.service';
 import { hashPassword } from '@/utils/hash';
 
 @Controller('/accounts')

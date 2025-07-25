@@ -5,13 +5,13 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import {
-  authenticateBodySchema,
-  AuthenticateBodySchema,
-} from '@/schemas/authenticateBodySchema';
+import type { JwtService } from '@nestjs/jwt';
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
-import { PrismaService } from '@/services/prisma/prisma.service';
+import {
+  type AuthenticateBodySchema,
+  authenticateBodySchema,
+} from '@/schemas/authenticateBodySchema';
+import type { PrismaService } from '@/services/prisma/prisma.service';
 import { comparePassword } from '@/utils/hash';
 
 @Controller('/sessions')
