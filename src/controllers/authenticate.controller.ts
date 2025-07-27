@@ -11,7 +11,7 @@ import {
   type AuthenticateBodySchema,
   authenticateBodySchema,
 } from '@/schemas/authenticateBodySchema';
-import { PrismaService } from '@/services/prisma/prisma.service';
+import { PrismaService } from '@/modules/prisma/prisma.service';
 import { comparePassword } from '@/utils/hash';
 
 @Controller('/sessions')
