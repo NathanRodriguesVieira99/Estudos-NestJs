@@ -18,13 +18,13 @@
     "prisma:generate": "npx prisma generate",
     "prisma:studio": "npx prisma studio",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-
     "test": "dotenv -e .env vitest run --bail 1",
     "test:watch": "dotenv -e .env -- vitest --bail 1",
     "test:coverage": "dotenv -e .env -- vitest run --coverage --no-file-parallelism --passWithNoTests",
     "test:debug": "dotenv -e .env -- vitest --inspect-brk --inspect --logHeapUsage --threads=false",
     "test:e2e": "dotenv -e .env -- vitest run --config ./vitest.config.e2e.ts",
-    "test:coverage:e2e": "dotenv -e .env -- vitest run --config vitest.config.e2e.ts --coverage"
+    "test:coverage:e2e": "dotenv -e .env -- vitest run --config vitest.config.e2e.ts --coverage",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
