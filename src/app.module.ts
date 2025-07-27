@@ -8,20 +8,20 @@ import { CreateQuestionController } from '@/controllers/create-question.controll
 import { PrismaModule } from './modules/prisma/prisma.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-      validate: (env) => envSchema.parse(env),
-      isGlobal: true,
-    }),
-    AuthModule,
-    PrismaModule,
-  ],
-  controllers: [
-    CreateAccountController,
-    AuthenticateController,
-    CreateQuestionController,
-  ],
-  providers: [],
+    imports: [
+        ConfigModule.forRoot({
+            envFilePath: '.env',
+            validate: (env) => envSchema.parse(env),
+            isGlobal: true,
+        }),
+        AuthModule,
+        PrismaModule,
+    ],
+    controllers: [
+        CreateAccountController,
+        AuthenticateController,
+        CreateQuestionController,
+    ],
+    providers: [],
 })
 export class AppModule {}

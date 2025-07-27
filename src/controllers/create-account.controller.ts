@@ -1,47 +1,47 @@
 import {
-  Body,
-  ConflictException,
-  Controller,
-  HttpCode,
-  Post,
-  UsePipes,
+    Body,
+    ConflictException,
+    Controller,
+    HttpCode,
+    Post,
+    UsePipes,
 } from '@nestjs/common';
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
 import {
-  type CreateAccountBodySchema,
-  createAccountBodySchema,
+    type CreateAccountBodySchema,
+    createAccountBodySchema,
 } from '@/schemas/createAccountBodySchema';
 import { PrismaService } from '@/modules/prisma/prisma.service';
 import { hashPassword } from '@/utils/hash';
 
 @Controller('/accounts')
 export class CreateAccountController {
-  constructor(private prisma: PrismaService) {}
+    constructor(private prisma: PrismaService) {}
 
-  @Post()
-  @HttpCode(201)
-  @UsePipes(new ZodValidationPipe(createAccountBodySchema))
-  async execute(@Body() body: CreateAccountBodySchema) {
-    const { name, email, password } = body;
+    @Post()
+    @HttpCode(201)
+    @UsePipes(new ZodValidationPipe(createAccountBodySchema))
+    async execute(@Body() body: CreateAccountBodySchema) {
+        const { name, email, password } = body;
 
-    const userWithSameEmail = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+        const userWithSameEmail = await this.prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
 
-    if (userWithSameEmail) {
-      throw new ConflictException('User with same email already exists');
+        if (userWithSameEmail) {
+            throw new ConflictException('User with same email already exists');
+        }
+
+        const hashedPassword = await hashPassword(password);
+
+        await this.prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+            },
+        });
     }
-
-    const hashedPassword = await hashPassword(password);
-
-    await this.prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
-    });
-  }
 }

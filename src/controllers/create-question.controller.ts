@@ -2,10 +2,10 @@ import { Controller, Post } from '@nestjs/common';
 
 @Controller('/questions')
 export class CreateQuestionController {
-  constructor() {}
+    constructor() {}
 
-  @Post()
-  async execute() {
-    return 'ok';
-  }
+    @Post()
+    async execute() {
+        return 'ok';
+    }
 }
