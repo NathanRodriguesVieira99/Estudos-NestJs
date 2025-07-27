@@ -26,4 +26,11 @@ describe('PrismaService', () => {
 
     expect(spyConnect).toBeCalledTimes(1);
   });
+  it('should call $disconnect', async () => {
+    const spyConnect = vi.spyOn(service, '$disconnect');
+
+    await service.onModuleDestroy();
+
+    expect(spyConnect).toBeCalledTimes(1);
+  });
 });
