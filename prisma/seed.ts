@@ -35,6 +35,12 @@ const seed = async () => {
     }
 };
 
-seed().then(() => {
-    console.log('Database seeded 🌱 ');
-});
+seed()
+    .then(() => {
+        console.log('Database seeded 🌱 ');
+    })
+    .catch(async (err) => {
+        console.error(err);
+        await prisma.$disconnect();
+        process.exit(1);
+    });
