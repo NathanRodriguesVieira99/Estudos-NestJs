@@ -15,12 +15,10 @@ export default defineConfig({
 			reporter: ['text', 'html', 'lcov', 'cobertura'],
 			include: ['src/**/*.{ts,js}'],
 			exclude: [
-				'**/*.test.{ts,tsx}',
-				'**/*.spec.{ts,tsx}',
 				'**/types/**',
 				'**/*.d.ts',
 				'**/mocks/**',
-				'**/*.test-utils.{ts,tsx}',
+				'**/*.test-utils.{ts}',
 				'src/main.ts',
 				'**/*.module.ts',
 			],
