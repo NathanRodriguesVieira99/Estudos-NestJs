@@ -4,33 +4,33 @@ import { ConfigModule } from '@nestjs/config';
 import { vi } from 'vitest';
 
 describe('PrismaService', () => {
-    let service: PrismaService;
+	let service: PrismaService;
 
-    beforeEach(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [ConfigModule.forRoot({ isGlobal: true })],
-            providers: [PrismaService],
-        }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			imports: [ConfigModule.forRoot({ isGlobal: true })],
+			providers: [PrismaService],
+		}).compile();
 
-        service = module.get<PrismaService>(PrismaService);
-    });
+		service = module.get<PrismaService>(PrismaService);
+	});
 
-    it('should be defined', () => {
-        expect(service).toBeDefined();
-    });
+	it('should be defined', () => {
+		expect(service).toBeDefined();
+	});
 
-    it('should call $connect', async () => {
-        const spyConnect = vi.spyOn(service, '$connect');
+	it('should call $connect', async () => {
+		const spyConnect = vi.spyOn(service, '$connect');
 
-        await service.onModuleInit();
+		await service.onModuleInit();
 
-        expect(spyConnect).toBeCalledTimes(1);
-    });
-    it('should call $disconnect', async () => {
-        const spyConnect = vi.spyOn(service, '$disconnect');
+		expect(spyConnect).toBeCalledTimes(1);
+	});
+	it('should call $disconnect', async () => {
+		const spyConnect = vi.spyOn(service, '$disconnect');
 
-        await service.onModuleDestroy();
+		await service.onModuleDestroy();
 
-        expect(spyConnect).toBeCalledTimes(1);
-    });
+		expect(spyConnect).toBeCalledTimes(1);
+	});
 });

@@ -1,47 +1,47 @@
 import {
-    Body,
-    Controller,
-    Post,
-    UnauthorizedException,
-    UsePipes,
+	Body,
+	Controller,
+	Post,
+	UnauthorizedException,
+	UsePipes,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '@/modules/prisma/prisma.service';
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
 import {
-    type AuthenticateBodySchema,
-    authenticateBodySchema,
+	type AuthenticateBodySchema,
+	authenticateBodySchema,
 } from '@/schemas/authenticateBodySchema';
-import { PrismaService } from '@/modules/prisma/prisma.service';
 import { comparePassword } from '@/utils/hash';
 
 @Controller('/sessions')
 export class AuthenticateController {
-    constructor(
-        private prisma: PrismaService,
-        private jwt: JwtService
-    ) {}
+	constructor(
+		private prisma: PrismaService,
+		private jwt: JwtService,
+	) {}
 
-    @Post()
-    @UsePipes(new ZodValidationPipe(authenticateBodySchema))
-    async execute(@Body() body: AuthenticateBodySchema) {
-        const { email, password } = body;
+	@Post()
+	@UsePipes(new ZodValidationPipe(authenticateBodySchema))
+	async execute(@Body() body: AuthenticateBodySchema) {
+		const { email, password } = body;
 
-        const user = await this.prisma.user.findUnique({
-            where: { email },
-        });
+		const user = await this.prisma.user.findUnique({
+			where: { email },
+		});
 
-        if (!user) {
-            throw new UnauthorizedException('User credentials do not match.');
-        }
+		if (!user) {
+			throw new UnauthorizedException('User credentials do not match.');
+		}
 
-        const isPasswordValid = comparePassword(password, user.password);
+		const isPasswordValid = comparePassword(password, user.password);
 
-        if (!isPasswordValid) {
-            throw new UnauthorizedException('User credentials do not match.');
-        }
+		if (!isPasswordValid) {
+			throw new UnauthorizedException('User credentials do not match.');
+		}
 
-        const accessToken = this.jwt.sign({ sub: user.id });
+		const accessToken = this.jwt.sign({ sub: user.id });
 
-        return { access_token: accessToken };
-    }
+		return { access_token: accessToken };
+	}
 }

@@ -6,12 +6,12 @@ import { Controller, Post, UseGuards } from '@nestjs/common';
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class CreateQuestionController {
-    constructor() {}
+	constructor() {}
 
-    @Post()
-    async execute(@CurrentUser() user: UserPayload) {
-        console.log(user);
+	@Post()
+	async execute(@CurrentUser() user: UserPayload) {
+		console.log(user);
 
-        return 'ok';
-    }
+		return 'ok';
+	}
 }
