@@ -1,7 +1,7 @@
 {
-  "src/**/*.ts": [
-    "eslint --fix src/**/*.ts",
-    "prettier --write src/**/*.ts",
-    "bun run test:coverage"
-  ]
+	"src/**/*.ts": [
+		"biome lint --apply",
+		"biome format --write",
+		"bun run test:coverage"
+	]
 }

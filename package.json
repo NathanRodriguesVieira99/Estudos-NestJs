@@ -7,7 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "biome format . --write",
+    "lint": "biome lint . --apply",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -17,8 +18,7 @@
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate",
     "prisma:studio": "npx prisma studio",
-    "prisma:seed":"ts-node prisma/seed.ts",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "prisma:seed": "ts-node prisma/seed.ts",
     "test": "dotenv -e .env vitest run --bail 1",
     "test:watch": "dotenv -e .env -- vitest --bail 1",
     "test:coverage": "dotenv -e .env -- vitest run --coverage --no-file-parallelism --passWithNoTests",
@@ -42,9 +42,9 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.18.0",
+    "@biomejs/biome": "2.1.2",
     "@faker-js/faker": "^9.9.0",
+    "@nedcloarbr/biome-config": "2.0.0",
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/swagger": "^11.2.0",
@@ -57,7 +57,6 @@
     "@vitest/coverage-v8": "^3.2.4",
     "dotenv": "^17.2.1",
     "dotenv-cli": "^9.0.0",
-    "eslint": "^9.31.0",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "prisma": "^6.11.1",
@@ -65,7 +64,6 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.20.0",
     "unplugin-swc": "^1.5.5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
