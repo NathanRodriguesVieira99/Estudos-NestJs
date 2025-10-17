@@ -1,5 +1,5 @@
-import { PrismaClient, type User } from '../generated/prisma'; // !! FIX atualizar type User por uma entidade
 import { faker } from '@faker-js/faker';
+import { PrismaClient, type User } from '../generated/prisma';
 import { hashPassword } from '../src/utils/hash';
 
 const prisma = new PrismaClient();

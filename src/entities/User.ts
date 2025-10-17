@@ -1,5 +1,5 @@
-import { hashPassword, comparePassword } from '@/utils/hash';
 import { randomUUID } from 'node:crypto';
+import { comparePassword, hashPassword } from '@/utils/hash';
 
 export interface UserProps {
 	id: string;

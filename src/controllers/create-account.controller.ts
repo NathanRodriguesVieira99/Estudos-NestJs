@@ -6,12 +6,12 @@ import {
 	Post,
 	UsePipes,
 } from '@nestjs/common';
+import { PrismaService } from '@/modules/prisma/prisma.service';
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
 import {
 	type CreateAccountBodySchema,
 	createAccountBodySchema,
 } from '@/schemas/createAccountBodySchema';
-import { PrismaService } from '@/modules/prisma/prisma.service';
 import { hashPassword } from '@/utils/hash';
 
 @Controller('/accounts')
