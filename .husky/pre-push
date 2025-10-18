@@ -1,4 +1,3 @@
 #!/bin/sh
 
-# Husky pre-push hook: run coverage tests
 pnpm test:coverage
