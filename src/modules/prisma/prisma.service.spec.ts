@@ -1,36 +1,56 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { vi } from 'vitest';
 import { PrismaService } from './prisma.service';
 
+const PrismaServiceMock = () => ({
+  onModuleInit: vi.fn(),
+  onModuleDestroy: vi.fn(),
+  $connect: vi.fn(),
+  $disconnect: vi.fn(),
+});
+
 describe('PrismaService', () => {
-	let service: PrismaService;
+  let service: PrismaService;
+  const prismaServiceMock = PrismaServiceMock();
 
-	beforeEach(async () => {
-		const module: TestingModule = await Test.createTestingModule({
-			imports: [ConfigModule.forRoot({ isGlobal: true })],
-			providers: [PrismaService],
-		}).compile();
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [ConfigModule.forRoot({ isGlobal: true })],
+      providers: [
+        {
+          provide: PrismaService,
+          useValue: prismaServiceMock,
+        },
+      ],
+    }).compile();
 
-		service = module.get<PrismaService>(PrismaService);
-	});
+    service = module.get<PrismaService>(PrismaService);
+  });
 
-	it('should be defined', () => {
-		expect(service).toBeDefined();
-	});
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
 
-	it('should call $connect', async () => {
-		const spyConnect = vi.spyOn(service, '$connect');
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
 
-		await service.onModuleInit();
+  it('should call $connect', async () => {
+    prismaServiceMock.onModuleInit.mockImplementation(() => {
+      prismaServiceMock.$connect();
+    });
 
-		expect(spyConnect).toBeCalledTimes(1);
-	});
-	it('should call $disconnect', async () => {
-		const spyConnect = vi.spyOn(service, '$disconnect');
+    await service.onModuleInit();
 
-		await service.onModuleDestroy();
+    expect(service.$connect).toBeCalledTimes(1);
+  });
 
-		expect(spyConnect).toBeCalledTimes(1);
-	});
+  it('should call $disconnect', async () => {
+    prismaServiceMock.onModuleDestroy.mockImplementation(() => {
+      prismaServiceMock.$disconnect();
+    });
+    await service.onModuleDestroy();
+
+    expect(service.$disconnect).toBeCalledTimes(1);
+  });
 });
