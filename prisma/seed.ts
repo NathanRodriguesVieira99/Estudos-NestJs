@@ -1,38 +1,10 @@
-import { faker } from '@faker-js/faker';
-import { PrismaClient, type User } from '../generated/prisma';
-import { hashPassword } from '../src/utils/hash';
+import { PrismaClient} from '../generated/prisma';
+import { seeds } from './seeds';
 
 const prisma = new PrismaClient();
 
 const seed = async () => {
-	await prisma.user.deleteMany();
-	await prisma.question.deleteMany();
-
-	const users: User[] = [];
-
-	for (let i = 0; i < 5; i++) {
-		const user = await prisma.user.create({
-			data: {
-				name: faker.person.fullName(),
-				email: faker.internet.email(),
-				password: await hashPassword('12345678'),
-			},
-		});
-
-		users.push(user);
-	}
-
-	for (let i = 0; i < 10; i++) {
-		const author = users[Math.floor(Math.random() * users.length)];
-		await prisma.question.create({
-			data: {
-				title: faker.lorem.sentence(),
-				slug: faker.string.uuid(),
-				content: faker.lorem.paragraph(),
-				authorId: author.id,
-			},
-		});
-	}
+  await seeds()
 };
 
 seed()
