@@ -1,0 +1,1 @@
+CREATE DATABASE estudos_nestjs_rocketseat_test_db;

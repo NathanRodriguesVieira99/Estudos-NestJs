@@ -13,6 +13,7 @@ services:
       POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
     volumes:
       - postgres_data:/bitnami/postgresql
+      - ./.docker/setup-test-db.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:
